@@ -1,4 +1,3 @@
-[![](https://img.shields.io/maintenance/yes/2020.svg)](https://github.com/inspiredminds/contao-newslist-date-groups)
 [![](https://img.shields.io/packagist/v/inspiredminds/contao-newslist-date-groups.svg)](https://packagist.org/packages/inspiredminds/contao-newslist-date-groups)
 [![](https://img.shields.io/packagist/dt/inspiredminds/contao-newslist-date-groups.svg)](https://packagist.org/packages/inspiredminds/contao-newslist-date-groups)
 
