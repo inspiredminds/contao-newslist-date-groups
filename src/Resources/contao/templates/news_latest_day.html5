@@ -1,0 +1,26 @@
+
+<?php if ($this->dayGroup): ?>
+  <h2 data-group-index="<?= $this->dayGroup->getIndex() ?>"><?= \Contao\Date::parse('l, j. F Y', $this->dayGroup->getDate()->getTimestamp()) ?></h2>
+<?php endif; ?>
+
+<div class="layout_latest arc_<?= $this->archive->id ?> block<?= $this->class ?>" itemscope itemtype="http://schema.org/Article">
+
+  <?php if ($this->hasMetaFields): ?>
+    <p class="info"><time datetime="<?= $this->datetime ?>" itemprop="datePublished"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->addImage): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php endif; ?>
+
+  <h3 itemprop="name"><?= $this->linkHeadline ?></h3>
+
+  <div class="ce_text block" itemprop="description">
+    <?= $this->teaser ?>
+  </div>
+
+  <?php if ($this->hasText || $this->hasTeaser): ?>
+    <p class="more"><?= $this->more ?></p>
+  <?php endif; ?>
+
+</div>

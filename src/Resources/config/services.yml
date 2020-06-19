@@ -1,0 +1,3 @@
+services:
+  InspiredMinds\ContaoNewslistDateGroups\EventListener\ParseArticlesListener:
+    public: true

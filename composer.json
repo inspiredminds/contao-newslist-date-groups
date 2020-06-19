@@ -1,0 +1,41 @@
+{
+    "name": "inspiredminds/contao-newslist-date-groups",
+    "description": "Contao extension to fill news templates with date grouping parameters, similar to eventlists.",
+    "type": "contao-bundle",
+    "homepage": "https://github.com/inspiredminds/contao-newslist-date-groups",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Fritz Michael Gschwantner",
+            "email": "fmg@inspiredminds.at"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/inspiredminds/contao-newslist-date-groups/issues",
+        "source": "https://github.com/inspiredminds/contao-newslist-date-groups"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/fritzmg"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "contao/core-bundle": "^4.4",
+        "contao/news-bundle": "^4.4",
+        "symfony/config": "^3.2 || ^4.0",
+        "symfony/dependency-injection": "^3.2 || ^4.1.12",
+        "symfony/filesystem": "^3.2 || ^4.0",
+        "symfony/http-kernel": "^3.2 || ^4.0",
+        "symfony/service-contracts": "^1.0 || ^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "InspiredMinds\\ContaoNewslistDateGroups\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "InspiredMinds\\ContaoNewslistDateGroups\\ContaoManagerPlugin"
+    }
+}
