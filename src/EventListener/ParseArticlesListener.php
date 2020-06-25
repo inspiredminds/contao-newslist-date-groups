@@ -29,11 +29,6 @@ class ParseArticlesListener implements ResetInterface
      */
     private $groups = [];
 
-    public function __construct()
-    {
-        $this->reset();
-    }
-
     public function __invoke(FrontendTemplate $template, array $newsEntry, Module $module): void
     {
         if ($module instanceof ModuleNewsReader) {
