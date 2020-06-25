@@ -25,9 +25,9 @@ class ParseArticlesListener implements ResetInterface
     private const YEAR_GROUP = 'Y';
 
     /**
-     * @var array<string,array<string,DateGroup>>
+     * @var array<string,array<string,array<string,DateGroup>>>
      */
-    private $groups;
+    private $groups = [];
 
     public function __construct()
     {
@@ -43,28 +43,27 @@ class ParseArticlesListener implements ResetInterface
         $newsDate = (new \DateTimeImmutable())->setTimestamp((int) $newsEntry['date']);
 
         foreach ([self::DAY_GROUP, self::MONTH_GROUP, self::YEAR_GROUP] as $group) {
-            $this->updateTemplate($template, $group, $newsDate);
+            $this->updateTemplate($template, $group, $newsDate, $module);
         }
     }
 
     public function reset(): void
     {
-        $this->groups = [
-            self::DAY_GROUP => [],
-            self::MONTH_GROUP => [],
-            self::YEAR_GROUP => [],
-        ];
+        $this->groups = [];
     }
 
-    private function updateTemplate(FrontendTemplate $template, string $group, \DateTimeImmutable $newsDate): void
+    private function updateTemplate(FrontendTemplate $template, string $groupType, \DateTimeImmutable $newsDate, Module $module): void
     {
-        $index = $newsDate->format($group);
+        $moduleIndex = 'module-'.$module->id;
+        $groupIndex = $newsDate->format($groupType);
 
-        if (!isset($this->groups[$group][$index])) {
-            $dateGroup = new DateGroup($newsDate, \count($this->groups[$group]) + 1);
-            $this->groups[$group][$index] = $dateGroup;
+        $this->initModuleGroup($moduleIndex);
 
-            switch ($group) {
+        if (!isset($this->groups[$moduleIndex][$groupType][$groupIndex])) {
+            $dateGroup = new DateGroup($newsDate, \count($this->groups[$moduleIndex][$groupType]) + 1);
+            $this->groups[$moduleIndex][$groupType][$groupIndex] = $dateGroup;
+
+            switch ($groupType) {
                 case self::DAY_GROUP:
                     $template->dayGroup = $dateGroup;
                     break;
@@ -75,8 +74,19 @@ class ParseArticlesListener implements ResetInterface
                     $template->yearGroup = $dateGroup;
                     break;
                 default:
-                    throw new \InvalidArgumentException('Unsupported group "'.$group.'".');
+                    throw new \InvalidArgumentException('Unsupported group type "'.$groupType.'".');
             }
+        }
+    }
+
+    private function initModuleGroup(string $moduleIndex): void
+    {
+        if (!isset($this->groups[$moduleIndex])) {
+            $this->groups[$moduleIndex] = [
+                self::DAY_GROUP => [],
+                self::MONTH_GROUP => [],
+                self::YEAR_GROUP => [],
+            ];
         }
     }
 }
