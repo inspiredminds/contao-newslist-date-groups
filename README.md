@@ -4,7 +4,7 @@
 Contao Newslist Date Groups
 =====================
 
-Contao extension to fill news templates with date grouping parameters, similar 
+This Contao extension provides news templates with date grouping parameters, similar 
 to eventlists. See the provided templates `news_latest_day`, `news_latest_month` 
 and `news_latest_year` for usage examples.
 
